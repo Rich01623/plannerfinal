@@ -501,8 +501,14 @@
         .message-thread-list { min-height: 0; border-right: 1px solid #d8dee8; background: #f8fafc; overflow-y: auto; }
         .message-thread-item { width: 100%; border: 0; border-bottom: 1px solid #e5e7eb; background: transparent; padding: 12px; text-align: left; cursor: pointer; color: #111827; }
         .message-thread-item:hover, .message-thread-item.active { background: #eef6ff; }
+        .message-thread-item.no-messages { color: #475569; }
+        .message-thread-item.no-messages .message-thread-title span:first-child { font-weight: 800; }
         .message-thread-title { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-weight: 900; font-size: 0.82rem; }
+        .message-thread-name { min-width: 0; display: inline-flex; align-items: center; gap: 6px; }
+        .message-thread-name-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .message-online-dot { flex: 0 0 auto; width: 9px; height: 9px; border-radius: 999px; background: #16a34a; box-shadow: 0 0 0 2px rgba(22,163,74,0.15); }
         .message-thread-email { margin-top: 3px; color: #64748b; font-size: 0.7rem; word-break: break-word; }
+        .message-thread-preview { margin-top: 4px; color: #94a3b8; font-size: 0.66rem; font-weight: 800; }
         .message-unread-badge { display: inline-flex; min-width: 18px; height: 18px; border-radius: 999px; background: var(--frost-red); color: white; align-items: center; justify-content: center; padding: 0 5px; font-size: 0.64rem; font-weight: 900; }
         .message-conversation { min-width: 0; min-height: 0; overflow: hidden; display: flex; flex-direction: column; background: white; }
         .message-conversation-title { border-bottom: 1px solid #e5e7eb; padding: 10px 14px; font-size: 0.86rem; font-weight: 900; color: #111827; }
@@ -512,9 +518,25 @@
         .message-bubble.customer { align-self: flex-start; background: #fff; border-left: 4px solid var(--frost-red); }
         .message-meta { font-size: 0.64rem; color: #64748b; font-weight: 800; margin-bottom: 4px; }
         .message-text { white-space: pre-wrap; word-break: break-word; font-size: 0.82rem; line-height: 1.35; }
+        .message-attachment { margin-top: 8px; display: inline-flex; flex-direction: column; gap: 2px; max-width: 100%; padding: 8px 10px; border: 1px solid #bfdbfe; border-radius: 7px; background: #f8fbff; color: #0f4c81; text-decoration: none; font-size: 0.78rem; font-weight: 900; }
+        .message-attachment:hover { background: #e8f3ff; }
+        .message-attachment small { color: #64748b; font-size: 0.66rem; font-weight: 800; }
+        .message-job-badge { margin: 0 0 7px; display: inline-flex; align-items: center; gap: 5px; max-width: 100%; border: 1px solid #f59e0b; border-radius: 999px; padding: 4px 9px; background: #fffbeb; color: #92400e; font-size: 0.7rem; font-weight: 900; cursor: pointer; }
+        .message-job-badge:hover { background: #fef3c7; }
         .message-compose { flex: 0 0 auto; border-top: 1px solid #e5e7eb; padding: 10px; display: flex; gap: 8px; align-items: flex-end; background: white; }
+        .message-compose-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+        .message-job-link-row { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 7px; align-items: center; }
+        .message-job-link-row label { color: #334155; font-size: 0.7rem; font-weight: 900; text-transform: uppercase; }
+        .message-job-link-row input,
+        .message-job-link-row select { min-width: 0; border: 1px solid #cbd5e1; border-radius: 6px; padding: 7px 8px; font-size: 0.8rem; font-weight: 800; background: #fff; color: #111827; }
+        .message-job-link-hint { min-height: 16px; color: #64748b; font-size: 0.68rem; font-weight: 800; }
         .message-compose textarea { flex: 1; min-height: 58px; max-height: 110px; resize: vertical; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px; font-size: 0.82rem; }
         .message-compose button { border: 0; border-radius: 5px; padding: 10px 14px; background: var(--frost-blue); color: white; font-weight: 900; cursor: pointer; }
+        .message-file-btn { border: 0; border-radius: 5px; padding: 10px 12px; background: #475569; color: white; font-weight: 900; cursor: pointer; font-size: 0.78rem; }
+        .message-file-btn.disabled { opacity: 0.55; cursor: not-allowed; pointer-events: none; }
+        .message-file-btn input { display: none; }
+        .message-selected-file { min-height: 18px; color: #334155; font-size: 0.72rem; font-weight: 800; display: flex; gap: 8px; align-items: center; }
+        .message-selected-file button { padding: 3px 7px; background: #e2e8f0; color: #111827; font-size: 0.68rem; }
         .message-empty { color: #64748b; font-weight: 800; text-align: center; padding: 24px 12px; }
 
         .quick-card-modal-content { width: 620px; max-width: 95vw; border-top: 5px solid var(--frost-red); }
@@ -707,7 +729,7 @@
         <div class="message-modal-head">
             <h2>Customer Messages</h2>
             <div style="display:flex; gap:8px; align-items:center;">
-                <button type="button" class="week-btn" onclick="loadPlannerMessages(false)" style="background:#0056b3;">Refresh</button>
+                <button type="button" class="week-btn" onclick="loadPlannerMessages(false, true)" style="background:#0056b3;">Refresh</button>
                 <button type="button" class="week-btn" onclick="closeModal('modal-planner-messages')" style="background:#ddd; color:#333;">Close</button>
             </div>
         </div>
@@ -721,7 +743,21 @@
                     <div class="message-empty">Customer conversations will appear here.</div>
                 </div>
                 <div class="message-compose">
-                    <textarea id="planner-message-input" placeholder="Type a reply..." disabled></textarea>
+                    <div class="message-compose-main">
+                        <div class="message-job-link-row">
+                            <label for="planner-message-job-link">Link job</label>
+                            <select id="planner-message-job-link" onchange="handlePlannerMessageJobLinkInput()" disabled>
+                                <option value="">No linked job</option>
+                            </select>
+                        </div>
+                        <div id="planner-message-job-hint" class="message-job-link-hint"></div>
+                        <textarea id="planner-message-input" placeholder="Type a reply..." disabled></textarea>
+                        <div id="planner-message-selected-file" class="message-selected-file"></div>
+                    </div>
+                    <label id="planner-message-file-label" class="message-file-btn disabled">
+                        Attach file
+                        <input id="planner-message-file" type="file" accept="image/*,application/pdf,.doc,.docx,.xls,.xlsx,.csv,.txt" onchange="handlePlannerMessageFileChange()" disabled>
+                    </label>
                     <button type="button" id="planner-message-send-btn" onclick="sendPlannerMessage()" disabled>Send</button>
                 </div>
             </div>
@@ -1203,7 +1239,11 @@ function escapeHtml(value) {
     const DRIVER_PUSH_FUNCTION_NAME = "driver-dispatch-push";
     const POD_STORAGE_BUCKETS = ['pods', 'pod-uploads'];
     const PORTAL_MESSAGES_TABLE = 'portal_messages';
+    const PORTAL_PRESENCE_TABLE = 'portal_client_presence';
+    const MESSAGE_ATTACHMENT_BUCKET = 'portal-message-files';
+    const MESSAGE_ATTACHMENT_MAX_MB = 15;
     const MESSAGE_POLL_INTERVAL_MS = 30000;
+    const PORTAL_ONLINE_WINDOW_MS = 125000;
     const podFolder = "https://drive.google.com/drive/folders/173z9mkrCmqmEyEENeH__-qvdw1SFJl7w?usp=sharing";
 
     const PLANNER_VEHICLES_TABLE = 'planner_vehicles';
@@ -1432,6 +1472,8 @@ function escapeHtml(value) {
     let showMaintenanceCards = false;
     let isDragging = false;
     let plannerMessagesRaw = [];
+    let plannerMessageClientsRaw = [];
+    let plannerPortalPresenceRaw = [];
     let plannerActiveMessageEmail = '';
     let plannerMessagePollTimer = null;
     const expandedPastPlannerDays = new Set();
@@ -8874,6 +8916,14 @@ Are you sure you want to place it here?`);
         return String(message && message.customer_email || '').trim().toLowerCase();
     }
 
+    function getPlannerClientEmail(profile) {
+        return String(profile && (profile.accounts_email || profile.email || profile.account_email) || '').trim().toLowerCase();
+    }
+
+    function getPlannerClientName(profile) {
+        return String(profile && (profile.customer_name || profile.name || profile.company_name) || '').trim();
+    }
+
     function formatMessageTime(value) {
         if (!value) return '';
         const d = new Date(value);
@@ -8881,8 +8931,322 @@ Are you sure you want to place it here?`);
         return d.toLocaleString('en-GB', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
     }
 
+    function formatMessageFileSize(size) {
+        const bytes = Number(size || 0);
+        if (!bytes || !Number.isFinite(bytes)) return '';
+        if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(bytes >= 10 * 1024 * 1024 ? 0 : 1)} MB`;
+        if (bytes >= 1024) return `${Math.round(bytes / 1024)} KB`;
+        return `${bytes} bytes`;
+    }
+
+    function renderMessageAttachment(message) {
+        const url = String(message && message.attachment_url || '').trim();
+        if (!url) return '';
+        const name = String(message.attachment_name || '').trim() || 'Attachment';
+        const detail = [formatMessageFileSize(message.attachment_size), message.attachment_type].filter(Boolean).join(' | ');
+        return `
+            <a class="message-attachment" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" download="${escapeHtml(name)}">
+                <span>${escapeHtml(name)}</span>
+                ${detail ? `<small>${escapeHtml(detail)}</small>` : ''}
+            </a>
+        `;
+    }
+
+    function getMessageJobLabel(message) {
+        const fts = String(message && message.fts_invoice_number || '').trim();
+        const id = String(message && message.related_job_id || '').trim();
+        if (fts) return fts;
+        if (id) return `Job ${id}`;
+        return '';
+    }
+
+    function renderMessageJobBadge(message, clickable = false) {
+        const label = getMessageJobLabel(message);
+        if (!label) return '';
+        if (!clickable) return `<span class="message-job-badge">Linked job: ${escapeHtml(label)}</span>`;
+        return `<button type="button" class="message-job-badge" onclick="openLinkedPlannerMessageJob(event, '${escapeInlineArg(message.related_job_id || '')}', '${escapeInlineArg(message.fts_invoice_number || '')}')">Linked job: ${escapeHtml(label)}</button>`;
+    }
+
+    function getPlannerMessageJobRows() {
+        const merged = new Map();
+        (allJobsRaw || []).forEach(job => {
+            if (job && job.id) merged.set(String(job.id), job);
+        });
+        (plannerSearchRows || []).forEach(job => {
+            if (job && job.id) merged.set(String(job.id), job);
+        });
+        return Array.from(merged.values())
+            .filter(job => job && job.id && String(job.fts_invoice_number || '').trim())
+            .sort((a, b) => {
+                const aFts = String(a.fts_invoice_number || '').localeCompare(String(b.fts_invoice_number || ''), undefined, { numeric: true, sensitivity: 'base' });
+                if (aFts !== 0) return aFts;
+                return String(a.id || '').localeCompare(String(b.id || ''), undefined, { numeric: true });
+            });
+    }
+
+    function normalisePlannerMessageText(value) {
+        return String(value || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    }
+
+    function getPlannerMessageActiveClient() {
+        const email = String(plannerActiveMessageEmail || '').trim().toLowerCase();
+        const client = (plannerMessageClientsRaw || []).find(item => String(item.email || '').trim().toLowerCase() === email) || {};
+        return {
+            email,
+            name: normalisePlannerMessageText(client.name || getPlannerMessageClientName(email))
+        };
+    }
+
+    function getPlannerMessageJobEmail(job) {
+        return String(job && (job.customer_email || job.account_email || job.accounts_email || job.cust_email) || '').trim().toLowerCase();
+    }
+
+    function plannerMessageJobMatchesActiveClient(job) {
+        const activeClient = getPlannerMessageActiveClient();
+        if (!activeClient.email && !activeClient.name) return false;
+        const jobEmail = getPlannerMessageJobEmail(job);
+        if (jobEmail && activeClient.email && jobEmail === activeClient.email) return true;
+
+        const jobCustomer = normalisePlannerMessageText(cleanTwoCardCustomerName(job && job.customer_name) || (job && job.customer_name));
+        return !!(jobCustomer && activeClient.name && jobCustomer === activeClient.name);
+    }
+
+    function getPlannerMessageJobRowsForActiveClient() {
+        return getPlannerMessageJobRows().filter(plannerMessageJobMatchesActiveClient);
+    }
+
+    function getPlannerMessageJobSummary(job) {
+        const fts = String(job && job.fts_invoice_number || '').trim();
+        const collPostcode = String(job && (job.coll_postcode || job.collection_postcode) || '').trim() || '-';
+        const delPostcode = String(job && (job.del_postcode || job.delivery_postcode) || '').trim() || '-';
+        const rawDelDate = job && (job.del_datetime || job.delivery_datetime || job.del_date || '');
+        const delDate = rawDelDate ? new Date(rawDelDate) : null;
+        const delDateText = delDate && !isNaN(delDate.getTime()) ? delDate.toLocaleDateString('en-GB') : '-';
+        return `${fts} - ${collPostcode} to ${delPostcode} - ${delDateText}`;
+    }
+
+    async function renderPlannerMessageJobOptions() {
+        const select = document.getElementById('planner-message-job-link');
+        if (!select) return;
+        const selectedValue = String(select.value || '');
+        try {
+            await loadPlannerSearchRows(false);
+        } catch (err) {
+            console.warn('Could not refresh job link options:', err);
+        }
+        const jobs = getPlannerMessageJobRowsForActiveClient().slice(0, 250);
+        select.innerHTML = '<option value="">No linked job</option>' + jobs.map(job => {
+            const value = String(job.id || '').trim();
+            const label = getPlannerMessageJobSummary(job);
+            return `<option value="${escapeHtml(value)}">${escapeHtml(label)}</option>`;
+        }).join('');
+        if (selectedValue && jobs.some(job => String(job.id || '') === selectedValue)) {
+            select.value = selectedValue;
+        }
+        handlePlannerMessageJobLinkInput();
+    }
+
+    function findPlannerMessageLinkedJob(value) {
+        const raw = String(value || '').trim();
+        if (!raw) return null;
+        const normalised = normalisePlannerFtsText(raw);
+        const jobs = getPlannerMessageJobRows();
+        return jobs.find(job => String(job.id) === raw)
+            || jobs.find(job => normalisePlannerFtsText(job.fts_invoice_number) === normalised)
+            || jobs.find(job => normalisePlannerFtsText(job.fts_invoice_number).includes(normalised))
+            || null;
+    }
+
+    function getMessageSafeRelatedJobId(value) {
+        const raw = String(value || '').trim();
+        if (!/^\d+$/.test(raw)) return null;
+        const numberValue = Number(raw);
+        return Number.isSafeInteger(numberValue) ? numberValue : raw;
+    }
+
+    function getPlannerMessageLinkedJobPayload() {
+        const select = document.getElementById('planner-message-job-link');
+        const selectedId = String(select && select.value || '').trim();
+        if (!selectedId) return {};
+        const job = getPlannerMessageJobRowsForActiveClient().find(row => String(row && row.id || '') === selectedId) || findPlannerMessageLinkedJob(selectedId);
+        if (!job) return {};
+        const payload = {};
+        if (job.fts_invoice_number) payload.fts_invoice_number = job.fts_invoice_number;
+        const relatedJobId = getMessageSafeRelatedJobId(job && job.id);
+        if (relatedJobId !== null) payload.related_job_id = relatedJobId;
+        return payload;
+    }
+
+    function handlePlannerMessageJobLinkInput() {
+        const input = document.getElementById('planner-message-job-link');
+        const hint = document.getElementById('planner-message-job-hint');
+        if (!hint) return;
+        hint.textContent = '';
+    }
+
+    function clearPlannerMessageJobLink() {
+        const input = document.getElementById('planner-message-job-link');
+        if (input) input.value = '';
+        handlePlannerMessageJobLinkInput();
+    }
+
+    async function openLinkedPlannerMessageJob(event, relatedJobId, ftsNumber) {
+        if (event) event.stopPropagation();
+        closeModal('modal-planner-messages');
+        try {
+            const jobs = await loadPlannerSearchRows(true);
+            const cleanId = String(relatedJobId || '').trim();
+            const cleanFts = normalisePlannerFtsText(ftsNumber);
+            const job = (jobs || []).find(row => cleanId && String(row.id) === cleanId)
+                || (jobs || []).find(row => cleanFts && normalisePlannerFtsText(row.fts_invoice_number) === cleanFts)
+                || (jobs || []).find(row => cleanFts && normalisePlannerFtsText(row.fts_invoice_number).includes(cleanFts));
+            if (!job) {
+                alert('Could not find that linked job on the planner.');
+                return;
+            }
+            await focusPlannerSearchResult(getPlannerSearchFocusId(job));
+        } catch (err) {
+            alert('Could not open linked job: ' + (err && err.message ? err.message : err));
+        }
+    }
+
+    function getSafeMessageStoragePart(value, fallback) {
+        return String(value || fallback || 'message')
+            .trim()
+            .toLowerCase()
+            .replace(/[^a-z0-9._-]+/g, '_')
+            .replace(/^_+|_+$/g, '')
+            .slice(0, 80) || fallback || 'message';
+    }
+
+    function getMessageAttachmentStoragePath(file, customerEmail) {
+        const safeEmail = getSafeMessageStoragePart(customerEmail, 'customer');
+        const safeName = getSafeMessageStoragePart(file && file.name, 'attachment');
+        return `messages/${safeEmail}/${Date.now()}_${Math.random().toString(36).slice(2, 8)}_${safeName}`;
+    }
+
+    async function uploadMessageAttachmentToStorage(file, customerEmail) {
+        if (!file) return null;
+        if (file.size > MESSAGE_ATTACHMENT_MAX_MB * 1024 * 1024) {
+            throw new Error(`This file is too large. Please choose a file under ${MESSAGE_ATTACHMENT_MAX_MB}MB.`);
+        }
+        const storagePath = getMessageAttachmentStoragePath(file, customerEmail);
+        const { error } = await sb.storage
+            .from(MESSAGE_ATTACHMENT_BUCKET)
+            .upload(storagePath, file, {
+                cacheControl: '3600',
+                contentType: file.type || 'application/octet-stream',
+                upsert: false
+            });
+        if (error) throw error;
+        const publicResult = sb.storage.from(MESSAGE_ATTACHMENT_BUCKET).getPublicUrl(storagePath);
+        const publicUrl = publicResult && publicResult.data && publicResult.data.publicUrl;
+        if (!publicUrl) throw new Error('File uploaded, but no public URL was returned.');
+        return {
+            attachment_url: publicUrl,
+            attachment_name: file.name || 'attachment',
+            attachment_type: file.type || 'application/octet-stream',
+            attachment_size: file.size || null,
+            attachment_bucket: MESSAGE_ATTACHMENT_BUCKET,
+            attachment_path: storagePath
+        };
+    }
+
+    function renderPlannerSelectedMessageFile() {
+        const fileInput = document.getElementById('planner-message-file');
+        const selected = document.getElementById('planner-message-selected-file');
+        if (!selected) return;
+        const file = fileInput && fileInput.files && fileInput.files[0];
+        selected.innerHTML = file
+            ? `<span>${escapeHtml(file.name)}${file.size ? ` (${escapeHtml(formatMessageFileSize(file.size))})` : ''}</span><button type="button" onclick="clearPlannerMessageFile()">Remove</button>`
+            : '';
+    }
+
+    function clearPlannerMessageFile() {
+        const fileInput = document.getElementById('planner-message-file');
+        if (fileInput) fileInput.value = '';
+        renderPlannerSelectedMessageFile();
+    }
+
+    function handlePlannerMessageFileChange() {
+        const fileInput = document.getElementById('planner-message-file');
+        const file = fileInput && fileInput.files && fileInput.files[0];
+        if (file && file.size > MESSAGE_ATTACHMENT_MAX_MB * 1024 * 1024) {
+            alert(`This file is too large. Please choose a file under ${MESSAGE_ATTACHMENT_MAX_MB}MB.`);
+            clearPlannerMessageFile();
+            return;
+        }
+        renderPlannerSelectedMessageFile();
+    }
+
+    function normalisePlannerMessageClientProfile(profile) {
+        const email = getPlannerClientEmail(profile);
+        if (!email) return null;
+        return {
+            email,
+            name: getPlannerClientName(profile) || email,
+            phone: String(profile && profile.accounts_tel || '').trim()
+        };
+    }
+
+    async function loadPlannerMessageClients() {
+        try {
+            const { data, error } = await sb
+                .from('customer_invoice_emails')
+                .select('customer_name, accounts_email, accounts_tel, portal_enabled')
+                .not('accounts_email', 'is', null)
+                .eq('portal_enabled', true)
+                .order('customer_name', { ascending: true });
+            if (error) throw error;
+            const clients = new Map();
+            (data || []).forEach(profile => {
+                const client = normalisePlannerMessageClientProfile(profile);
+                if (!client) return;
+                if (!clients.has(client.email)) clients.set(client.email, client);
+            });
+            plannerMessageClientsRaw = Array.from(clients.values());
+        } catch (err) {
+            console.warn('Could not load booking portal clients for planner messages:', err);
+        }
+    }
+
+    async function loadPlannerPortalPresence() {
+        try {
+            const { data, error } = await sb
+                .from(PORTAL_PRESENCE_TABLE)
+                .select('customer_email, customer_name, last_seen_at, is_online');
+            if (error) throw error;
+            plannerPortalPresenceRaw = data || [];
+        } catch (err) {
+            plannerPortalPresenceRaw = [];
+            console.warn('Could not load portal client presence:', err);
+        }
+    }
+
+    function isPlannerMessageClientOnline(email) {
+        const cleanEmail = String(email || '').trim().toLowerCase();
+        if (!cleanEmail) return false;
+        const presence = (plannerPortalPresenceRaw || []).find(row => String(row.customer_email || '').trim().toLowerCase() === cleanEmail);
+        if (!presence || presence.is_online === false) return false;
+        const seenTime = Date.parse(presence.last_seen_at || '');
+        return Number.isFinite(seenTime) && (Date.now() - seenTime) <= PORTAL_ONLINE_WINDOW_MS;
+    }
+
     function groupPlannerMessagesByCustomer(messages) {
         const groups = new Map();
+        (plannerMessageClientsRaw || []).forEach(client => {
+            const key = String(client && client.email || '').trim().toLowerCase();
+            if (!key) return;
+            groups.set(key, {
+                email: key,
+                name: client.name || key,
+                phone: client.phone || '',
+                messages: [],
+                unread: 0,
+                latest: '',
+                hasMessages: false
+            });
+        });
         (messages || []).forEach(message => {
             const key = getMessageCustomerKey(message);
             if (!key) return;
@@ -8890,18 +9254,36 @@ Are you sure you want to place it here?`);
                 groups.set(key, {
                     email: key,
                     name: message.customer_name || key,
+                    phone: '',
                     messages: [],
                     unread: 0,
-                    latest: ''
+                    latest: '',
+                    hasMessages: false
                 });
             }
             const group = groups.get(key);
             if (message.customer_name && group.name === key) group.name = message.customer_name;
             group.messages.push(message);
             group.latest = message.created_at || group.latest;
+            group.hasMessages = true;
             if (String(message.sender_type || '').toLowerCase() === 'customer' && !message.read_by_planner) group.unread += 1;
         });
-        return Array.from(groups.values()).sort((a, b) => String(b.latest || '').localeCompare(String(a.latest || '')));
+        return Array.from(groups.values()).sort((a, b) => {
+            if ((a.unread > 0) !== (b.unread > 0)) return a.unread > 0 ? -1 : 1;
+            if (a.latest || b.latest) {
+                if (!a.latest) return 1;
+                if (!b.latest) return -1;
+                return String(b.latest || '').localeCompare(String(a.latest || ''));
+            }
+            return String(a.name || a.email).localeCompare(String(b.name || b.email), undefined, { sensitivity: 'base' });
+        });
+    }
+
+    function getPlannerMessageClientName(email) {
+        const cleanEmail = String(email || '').trim().toLowerCase();
+        if (!cleanEmail) return '';
+        const client = (plannerMessageClientsRaw || []).find(item => String(item.email || '').trim().toLowerCase() === cleanEmail);
+        return client && client.name ? client.name : '';
     }
 
     function renderPlannerMessageUnread() {
@@ -8919,7 +9301,7 @@ Are you sure you want to place it here?`);
         if (!list) return;
         const groups = groupPlannerMessagesByCustomer(plannerMessagesRaw);
         if (!groups.length) {
-            list.innerHTML = '<div class="message-empty">No customer messages yet.</div>';
+            list.innerHTML = '<div class="message-empty">No booking portal clients found.</div>';
             renderPlannerConversation();
             return;
         }
@@ -8927,15 +9309,17 @@ Are you sure you want to place it here?`);
             plannerActiveMessageEmail = groups[0].email;
         }
         list.innerHTML = groups.map(group => `
-            <button type="button" class="message-thread-item ${group.email === plannerActiveMessageEmail ? 'active' : ''}" onclick="selectPlannerMessageThread('${escapeInlineArg(group.email)}')">
+            <button type="button" class="message-thread-item ${group.email === plannerActiveMessageEmail ? 'active' : ''} ${group.hasMessages ? '' : 'no-messages'}" onclick="selectPlannerMessageThread('${escapeInlineArg(group.email)}')">
                 <div class="message-thread-title">
-                    <span>${escapeHtml(group.name || group.email)}</span>
+                    <span class="message-thread-name">${isPlannerMessageClientOnline(group.email) ? '<span class="message-online-dot" title="Logged into booking portal"></span>' : ''}<span class="message-thread-name-text">${escapeHtml(group.name || group.email)}</span></span>
                     ${group.unread ? `<span class="message-unread-badge">${group.unread > 99 ? '99+' : group.unread}</span>` : ''}
                 </div>
                 <div class="message-thread-email">${escapeHtml(group.email)}</div>
+                ${group.hasMessages ? '' : '<div class="message-thread-preview">No messages yet</div>'}
             </button>
         `).join('');
         renderPlannerConversation();
+        renderPlannerMessageJobOptions();
     }
 
     function renderPlannerConversation() {
@@ -8943,13 +9327,21 @@ Are you sure you want to place it here?`);
         const list = document.getElementById('planner-message-list');
         const input = document.getElementById('planner-message-input');
         const send = document.getElementById('planner-message-send-btn');
+        const fileInput = document.getElementById('planner-message-file');
+        const fileLabel = document.getElementById('planner-message-file-label');
+        const jobInput = document.getElementById('planner-message-job-link');
         if (!title || !list || !input || !send) return;
         const messages = (plannerMessagesRaw || []).filter(message => getMessageCustomerKey(message) === plannerActiveMessageEmail);
-        const displayName = messages.find(message => message.customer_name)?.customer_name || plannerActiveMessageEmail || 'Select a customer';
+        const displayName = messages.find(message => message.customer_name)?.customer_name || getPlannerMessageClientName(plannerActiveMessageEmail) || plannerActiveMessageEmail || 'Select a customer';
         title.textContent = plannerActiveMessageEmail ? `${displayName} | ${plannerActiveMessageEmail}` : 'Select a customer';
         input.disabled = !plannerActiveMessageEmail;
         send.disabled = !plannerActiveMessageEmail;
+        if (fileInput) fileInput.disabled = !plannerActiveMessageEmail;
+        if (fileLabel) fileLabel.classList.toggle('disabled', !plannerActiveMessageEmail);
+        if (jobInput) jobInput.disabled = !plannerActiveMessageEmail;
         if (!plannerActiveMessageEmail) {
+            clearPlannerMessageFile();
+            clearPlannerMessageJobLink();
             list.innerHTML = '<div class="message-empty">Customer conversations will appear here.</div>';
             return;
         }
@@ -8959,7 +9351,9 @@ Are you sure you want to place it here?`);
             return `
                 <div class="message-bubble ${senderType}">
                     <div class="message-meta">${escapeHtml(senderName)} | ${escapeHtml(formatMessageTime(message.created_at))}</div>
-                    <div class="message-text">${escapeHtml(message.message_text || '')}</div>
+                    ${renderMessageJobBadge(message, true)}
+                    ${message.message_text ? `<div class="message-text">${escapeHtml(message.message_text || '')}</div>` : ''}
+                    ${renderMessageAttachment(message)}
                 </div>
             `;
         }).join('') || '<div class="message-empty">No messages in this thread yet.</div>';
@@ -8969,13 +9363,26 @@ Are you sure you want to place it here?`);
     }
 
     async function selectPlannerMessageThread(email) {
-        plannerActiveMessageEmail = String(email || '').trim().toLowerCase();
+        const nextEmail = String(email || '').trim().toLowerCase();
+        if (nextEmail !== plannerActiveMessageEmail) {
+            clearPlannerMessageFile();
+            clearPlannerMessageJobLink();
+        }
+        plannerActiveMessageEmail = nextEmail;
         renderPlannerMessageThreads();
+        await renderPlannerMessageJobOptions();
         await markPlannerThreadRead(plannerActiveMessageEmail);
     }
 
-    async function loadPlannerMessages(silent = true) {
+    async function loadPlannerMessages(silent = true, includeClients = false) {
         try {
+            const messagesModalOpen = document.getElementById('modal-planner-messages')?.style.display === 'flex';
+            if (includeClients || (messagesModalOpen && !plannerMessageClientsRaw.length)) {
+                await loadPlannerMessageClients();
+            }
+            if (messagesModalOpen) {
+                await loadPlannerPortalPresence();
+            }
             const { data, error } = await sb.from(PORTAL_MESSAGES_TABLE)
                 .select('*')
                 .order('created_at', { ascending: true })
@@ -8983,7 +9390,7 @@ Are you sure you want to place it here?`);
             if (error) throw error;
             plannerMessagesRaw = data || [];
             renderPlannerMessageUnread();
-            if (document.getElementById('modal-planner-messages')?.style.display === 'flex') {
+            if (messagesModalOpen) {
                 renderPlannerMessageThreads();
                 if (plannerActiveMessageEmail) await markPlannerThreadRead(plannerActiveMessageEmail);
             }
@@ -9013,28 +9420,50 @@ Are you sure you want to place it here?`);
 
     async function sendPlannerMessage() {
         const input = document.getElementById('planner-message-input');
+        const fileInput = document.getElementById('planner-message-file');
+        const send = document.getElementById('planner-message-send-btn');
         const text = String(input && input.value || '').trim();
-        if (!plannerActiveMessageEmail || !text) return;
+        const file = fileInput && fileInput.files && fileInput.files[0];
+        if (!plannerActiveMessageEmail || (!text && !file)) return;
         const threadMessages = (plannerMessagesRaw || []).filter(message => getMessageCustomerKey(message) === plannerActiveMessageEmail);
-        const customerName = threadMessages.find(message => message.customer_name)?.customer_name || plannerActiveMessageEmail;
-        const payload = {
-            customer_email: plannerActiveMessageEmail,
-            customer_name: customerName,
-            sender_type: 'planner',
-            sender_name: 'FROST Planner',
-            message_text: text,
-            read_by_planner: true,
-            read_by_customer: false
-        };
-        const { error } = await sb.from(PORTAL_MESSAGES_TABLE).insert([payload]);
-        if (error) return alert('Could not send message: ' + error.message);
-        if (input) input.value = '';
-        await loadPlannerMessages(false);
+        const customerName = threadMessages.find(message => message.customer_name)?.customer_name || getPlannerMessageClientName(plannerActiveMessageEmail) || plannerActiveMessageEmail;
+        if (send) {
+            send.disabled = true;
+            send.textContent = file ? 'Uploading...' : 'Sending...';
+        }
+        try {
+            const attachmentPayload = file ? await uploadMessageAttachmentToStorage(file, plannerActiveMessageEmail) : null;
+            const payload = {
+                customer_email: plannerActiveMessageEmail,
+                customer_name: customerName,
+                sender_type: 'planner',
+                sender_name: 'FROST Planner',
+                message_text: text || (file ? `Attached file: ${file.name || 'attachment'}` : ''),
+                read_by_planner: true,
+                read_by_customer: false,
+                ...getPlannerMessageLinkedJobPayload(),
+                ...(attachmentPayload || {})
+            };
+            const { error } = await sb.from(PORTAL_MESSAGES_TABLE).insert([payload]);
+            if (error) throw error;
+            if (input) input.value = '';
+            clearPlannerMessageFile();
+            clearPlannerMessageJobLink();
+            await loadPlannerMessages(false);
+        } catch (err) {
+            alert('Could not send message: ' + (err && err.message ? err.message : err));
+        } finally {
+            if (send) {
+                send.disabled = !plannerActiveMessageEmail;
+                send.textContent = 'Send';
+            }
+        }
     }
 
     function openPlannerMessages() {
         openModal('modal-planner-messages');
-        loadPlannerMessages(false);
+        renderPlannerMessageJobOptions();
+        loadPlannerMessages(false, true);
     }
 
     function startPlannerMessagePolling() {
