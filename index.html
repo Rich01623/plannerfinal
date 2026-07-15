@@ -18,6 +18,8 @@
             --frost-red: #c1272d;
             --frost-black: #1a1a1a;
             --frost-blue: #0056b3; 
+            --header-red: #e30613;
+            --header-red-dark: #b9040f;
             --light-grey: #f4f4f4;
             --border-color: #ccc;
             --whatsapp-green: #25D366;
@@ -36,32 +38,53 @@
         /* ==========================================
            2. HEADER & NAVIGATION
            ========================================== */
-        header { background: #2c3e50; padding: 0; border-bottom: 3px solid var(--frost-red); display: flex; align-items: stretch; justify-content: space-between; flex-shrink: 0; z-index: 100; box-shadow: none; }
-        .logo-container { display:flex; align-items:center; padding:0 14px; background:#2c3e50; }
+        header { background: var(--header-red); padding: 0; border-bottom: 3px solid var(--header-red-dark); display: flex; align-items: stretch; justify-content: space-between; flex-shrink: 0; z-index: 100; box-shadow: none; }
+        .logo-container { display:flex; align-items:center; padding:0 14px; background:var(--header-red); }
         .logo-container img { height: 50px; display:block; }
         
-        .grand-total-box { background: var(--frost-black); color: white; padding: 5px 15px; border-radius: 0; border-left: 4px solid var(--price-green); display:flex; align-items:center; }
+        .grand-total-box { background: var(--header-red); color: white; padding: 5px 15px; border-radius: 0; border-left: 1px solid rgba(255,255,255,0.18); display:flex; align-items:center; }
         .grand-total-value { font-size: 1.1rem; font-weight: bold; color: var(--whatsapp-green); }
-        .week-info-box { background: #233241; color: white; padding: 5px 12px; border-radius: 0; border: none; border-left: 1px solid rgba(255,255,255,0.18); font-size: 0.85rem; font-weight: bold; display:flex; align-items:center; }
+        .week-info-box { background: var(--header-red); color: white; padding: 5px 12px; border-radius: 0; border: none; border-left: 1px solid rgba(255,255,255,0.18); font-size: 0.85rem; font-weight: bold; display:flex; align-items:center; }
         .week-info-box select { margin:0 6px; background:#fff; color:#1a1a1a; border:0; border-radius:3px; padding:3px 6px; font-size:0.82rem; font-weight:900; cursor:pointer; }
         .week-info-box span { white-space:nowrap; }
 
-        .header-actions-wrapper { display:flex; gap:0; align-items:stretch; justify-content:flex-end; min-width:0; flex:1; background:#2c3e50; }
-        .header-menu-stack { display:flex; flex-direction:column; min-width:0; flex:1; overflow:hidden; background:#2c3e50; }
-        .header-menu-bar { display:flex; align-items:stretch; gap:0; overflow:hidden; background:#2c3e50; flex-wrap:nowrap; width:100%; }
-        .header-menu-row-secondary .menu-group:last-child { margin-left:auto; }
-        .header-menu-bar .week-btn { border-radius:0 !important; margin:0; border:0; box-shadow:none; white-space:nowrap; background:#2c3e50 !important; color:white !important; }
-        .header-menu-bar .week-btn:hover { transform:none; background:#243342 !important; }
+        .header-actions-wrapper { display:flex; gap:0; align-items:stretch; justify-content:flex-end; min-width:0; flex:1; background:var(--header-red); }
+        .header-menu-stack { display:flex; min-width:0; flex:1; overflow:visible; background:var(--header-red); }
+        .header-menu-bar { display:flex; align-items:stretch; gap:0; overflow:visible; background:var(--header-red); flex-wrap:nowrap; width:100%; min-height:50px; }
+        .toolbar-menu { position:relative; display:flex; align-items:stretch; border-left:1px solid rgba(255,255,255,0.16); }
+        .toolbar-menu:first-child { border-left:0; }
+        .toolbar-menu-trigger,
+        .toolbar-direct-btn { border:0; border-radius:0; margin:0; background:var(--header-red); color:white; padding:0 18px; font-size:0.82rem; font-weight:900; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:6px; }
+        .toolbar-menu-trigger::after { content:""; width:0; height:0; border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid rgba(255,255,255,0.8); margin-left:2px; }
+        .toolbar-menu:hover .toolbar-menu-trigger,
+        .toolbar-menu:focus-within .toolbar-menu-trigger,
+        .toolbar-direct-btn:hover { background:var(--header-red-dark); }
+        .toolbar-menu-dropdown { display:none; position:absolute; top:100%; left:0; min-width:210px; z-index:2000; background:#fff; border:1px solid #cbd5e1; border-top:3px solid var(--frost-red); box-shadow:0 10px 24px rgba(15,23,42,0.22); padding:5px; }
+        .toolbar-menu:hover .toolbar-menu-dropdown,
+        .toolbar-menu:focus-within .toolbar-menu-dropdown { display:block; }
+        .menu-dropdown-item { width:100%; border:0; border-radius:3px; margin:0; background:#fff; color:#111827; padding:9px 11px; text-align:left; font-size:0.82rem; font-weight:800; cursor:pointer; white-space:nowrap; display:block; }
+        .menu-dropdown-item:hover,
+        .menu-dropdown-item:focus { background:#eef6ff; color:#0f172a; outline:none; }
+        .menu-dropdown-item.active,
+        .toolbar-menu .menu-dropdown-item.week-btn.active { background:var(--frost-red) !important; color:#fff !important; }
+        .toolbar-menu .menu-dropdown-item.week-btn { background:#fff !important; color:#111827 !important; padding:9px 11px; }
+        .header-planner-search { position:relative; display:flex; align-items:center; width:300px; min-width:220px; padding:0 8px; background:var(--header-red); border-left:1px solid rgba(255,255,255,0.16); }
+        .header-planner-search input { width:100%; height:30px; border:1px solid rgba(255,255,255,0.28); border-radius:4px; background:#fff; color:#111827; padding:0 9px; font-size:0.78rem; font-weight:800; outline:none; }
+        .header-planner-search input:focus { border-color:#93c5fd; box-shadow:0 0 0 2px rgba(147,197,253,0.25); }
+        .header-search-results { display:none; position:absolute; top:100%; left:8px; right:8px; z-index:2200; max-height:420px; overflow-y:auto; background:#fff; border:1px solid #cbd5e1; border-top:3px solid #2563eb; box-shadow:0 10px 24px rgba(15,23,42,0.24); border-radius:0 0 6px 6px; }
+        .header-search-results .planner-search-result { padding:9px 10px; }
+        .header-search-results .planner-search-result-title { font-size:0.78rem; }
+        .header-search-results .planner-search-result-meta { font-size:0.66rem; }
 
-        .driver-notification-ticker { flex-shrink:0; height:30px; display:flex; align-items:center; background:#0f172a; color:#fff; border-bottom:2px solid var(--frost-red); overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.18); }
-        .driver-ticker-label { align-self:stretch; display:flex; align-items:center; gap:8px; padding:0 10px 0 12px; background:var(--frost-red); font-size:0.68rem; font-weight:900; letter-spacing:0; white-space:nowrap; }
+        .driver-notification-ticker { flex-shrink:0; height:30px; display:flex; align-items:center; background:var(--header-red); color:#fff; border-bottom:2px solid var(--header-red-dark); overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.18); }
+        .driver-ticker-label { align-self:stretch; display:flex; align-items:center; gap:8px; padding:0 10px 0 12px; background:var(--header-red-dark); font-size:0.68rem; font-weight:900; letter-spacing:0; white-space:nowrap; }
         .driver-ticker-toggle { border:1px solid rgba(255,255,255,0.55); background:rgba(255,255,255,0.16); color:white; border-radius:3px; padding:2px 6px; font-size:0.62rem; font-weight:900; cursor:pointer; line-height:1.1; }
         .driver-ticker-toggle:hover { background:rgba(255,255,255,0.28); }
         .driver-ticker-window { flex:1; overflow:hidden; min-width:0; }
         .driver-ticker-track { display:inline-flex; align-items:center; gap:36px; white-space:nowrap; padding-left:100%; animation:driverTickerScroll 55s linear infinite; font-size:0.78rem; font-weight:800; }
         .driver-ticker-track:hover { animation-play-state:paused; }
         .driver-ticker-item { display:inline-flex; align-items:center; gap:7px; }
-        .driver-notification-ticker.disabled { background:var(--frost-red); }
+        .driver-notification-ticker.disabled { background:var(--header-red-dark); }
         .driver-notification-ticker.disabled .driver-ticker-window { display:none; }
         @keyframes driverTickerScroll { from { transform:translateX(0); } to { transform:translateX(-100%); } }
 
@@ -475,16 +498,18 @@
         .timestamp-toast-yes { background: var(--whatsapp-green); color:white; }
         .timestamp-toast-no { background: rgba(255,255,255,0.18); color:white; border:1px solid rgba(255,255,255,0.35) !important; }
         @keyframes timestampToastIn { to { opacity: 1; transform: translateY(0); } }
-        .header-menu-stack .week-btn,
-        .header-menu-stack .week-btn:hover,
-        .header-menu-stack .planner-search-btn,
-        .header-menu-stack .instruction-btn,
-        .header-menu-stack .quick-card-btn {
-            background:#2c3e50 !important;
+        .header-menu-stack .toolbar-direct-btn,
+        .header-menu-stack .toolbar-menu-trigger {
+            background:var(--header-red) !important;
             color:#fff !important;
             border:0 !important;
             box-shadow:none !important;
             outline:none !important;
+        }
+        .header-menu-stack .toolbar-direct-btn:hover,
+        .header-menu-stack .toolbar-menu:hover .toolbar-menu-trigger,
+        .header-menu-stack .toolbar-menu:focus-within .toolbar-menu-trigger {
+            background:var(--header-red-dark) !important;
         }
         .header-mode-client .postcode-header .pc-coll,
         .header-mode-client .postcode-header .pc-del,
@@ -525,7 +550,11 @@
             50% { box-shadow: inset 0 0 0 2px rgba(255,255,255,0.45), 0 0 0 6px rgba(193,39,45,0.22); filter: brightness(1.18); }
         }
         .message-conversation { min-width: 0; min-height: 0; overflow: hidden; display: flex; flex-direction: column; background: white; }
-        .message-conversation-title { border-bottom: 1px solid #e5e7eb; padding: 10px 14px; font-size: 0.86rem; font-weight: 900; color: #111827; }
+        .message-conversation-title { border-bottom: 1px solid #e5e7eb; padding: 10px 14px; font-size: 0.86rem; font-weight: 900; color: #111827; display:flex; align-items:center; justify-content:space-between; gap:10px; }
+        .message-conversation-title-text { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .message-clear-chat-btn { flex:0 0 auto; border:0; border-radius:5px; padding:7px 10px; background:#dc2626; color:#fff; font-size:0.72rem; font-weight:900; cursor:pointer; }
+        .message-clear-chat-btn:hover { background:#b91c1c; }
+        .message-clear-chat-btn:disabled { background:#cbd5e1; color:#64748b; cursor:not-allowed; }
         .message-list { flex: 1; min-height: 0; max-height: 100%; overflow-y: auto; overscroll-behavior: contain; padding: 14px; display: flex; flex-direction: column; gap: 10px; background: #f8fafc; }
         .message-bubble { max-width: 76%; border-radius: 8px; padding: 9px 11px; border: 1px solid #d8dee8; background: white; color: #111827; box-shadow: 0 1px 2px rgba(15,23,42,0.05); }
         .message-bubble.planner { align-self: flex-end; background: #e8f3ff; border-color: #bfdbfe; }
@@ -594,34 +623,56 @@
     <div class="header-actions-wrapper">
         <div class="header-menu-stack">
             <div class="header-menu-bar">
-                <button class="week-btn planner-search-btn" onclick="openPlannerSearch()">SEARCH</button>
-                <button class="week-btn instruction-btn" onclick="openInstructionModal()">INSTRUCTION</button>
-                <button class="week-btn quick-card-btn" onclick="openQuickCardModal()">QUICK CARD</button>
-                <button class="week-btn" onclick="openPostcodeSearch()">POSTCODE</button>
-                <button class="week-btn" id="btn-toggle-maintenance" onclick="toggleMaintenanceCards()">HIDE MAINTENANCE</button>
-                <button class="week-btn" id="btn-toggle-header" onclick="toggleHeaderView()">TOWNS</button>
-                <button class="week-btn" onclick="syncMaintenanceAndLoadAll()">SYNC</button>
-                <button class="week-btn" onclick="openAddVehicleModal()">ADD VEHICLE</button>
-                <button class="week-btn" id="planner-message-button" onclick="openPlannerMessages()">MESSAGE <span id="planner-message-unread" class="message-unread-badge" style="display:none;">0</span></button>
-                <button class="week-btn" id="btn-toggle-notifications" onclick="toggleOperationalNotifications()">HIDE NOTIFICATIONS</button>
-            </div>
-            <div class="header-menu-bar header-menu-row-secondary">
-                <div class="menu-group">
-                    <button class="week-btn" onclick="toggleUnassigned()">UNASSIGNED</button>
-                    <button class="week-btn" onclick="toggleMaintenancePool()">MAINTENANCE POOL</button>
-                    <button class="week-btn" onclick="resetForm(); openModal('modal-add')">+ NEW JOB</button>
-                    <button class="week-btn multi-job-btn" onclick="openMultiJobModal()">+ MULTI JOB</button>
-                    <button class="week-btn" onclick="openNoteModal()">NOTES</button>
-                    <button class="week-btn" onclick="generateWeeklyPlannerReport(event)">REPORT</button>
+                <div class="toolbar-menu">
+                    <button type="button" class="toolbar-menu-trigger">Planning</button>
+                    <div class="toolbar-menu-dropdown">
+                        <button type="button" class="menu-dropdown-item" onclick="openNewJobForm()">+ New Job</button>
+                        <button type="button" class="menu-dropdown-item" onclick="openMultiJobModal()">+ Multi Job</button>
+                        <button type="button" class="menu-dropdown-item" onclick="openQuickCardModal()">Quick Card</button>
+                        <button type="button" class="menu-dropdown-item" onclick="openInstructionModal()">Instruction</button>
+                    </div>
                 </div>
-                <div class="menu-group">
-                    <button class="week-btn active" id="btn-w0" onclick="switchView(0)">WEEK 1</button>
-                    <button class="week-btn" id="btn-w1" onclick="switchView(1)">WEEK 2</button>
-                    <button class="week-btn" id="btn-w2" onclick="switchView(2)">WEEK 3</button>
-                    <button class="week-btn" id="btn-w3" onclick="switchView(3)">WEEK 4</button>
-                    <button class="week-btn" onclick="toggleWeekend()">W/E</button>
+                <div class="toolbar-menu">
+                    <button type="button" class="toolbar-menu-trigger">Tools</button>
+                    <div class="toolbar-menu-dropdown">
+                        <button type="button" class="menu-dropdown-item" onclick="openPostcodeSearch()">Postcode</button>
+                        <button type="button" class="menu-dropdown-item" onclick="openNoteModal()">Notes</button>
+                        <button type="button" class="menu-dropdown-item" onclick="generateWeeklyPlannerReport(event)">Report</button>
+                    </div>
+                </div>
+                <button type="button" class="toolbar-direct-btn" id="planner-message-button" onclick="openPlannerMessages()">Message <span id="planner-message-unread" class="message-unread-badge" style="display:none;">0</span></button>
+                <div class="toolbar-menu">
+                    <button type="button" class="toolbar-menu-trigger">Admin</button>
+                    <div class="toolbar-menu-dropdown">
+                        <button type="button" class="menu-dropdown-item" onclick="openAddVehicleModal()">Add Vehicle</button>
+                        <button type="button" class="menu-dropdown-item" onclick="syncMaintenanceAndLoadAll()">Sync</button>
+                        <button type="button" class="menu-dropdown-item" id="btn-toggle-maintenance" onclick="toggleMaintenanceCards()">Hide Maintenance</button>
+                        <button type="button" class="menu-dropdown-item" id="btn-toggle-notifications" onclick="toggleOperationalNotifications()">Hide Notifications</button>
+                    </div>
+                </div>
+                <div class="toolbar-menu">
+                    <button type="button" class="toolbar-menu-trigger">View</button>
+                    <div class="toolbar-menu-dropdown">
+                        <button type="button" class="menu-dropdown-item" onclick="toggleUnassigned()">Unassigned</button>
+                        <button type="button" class="menu-dropdown-item" onclick="toggleMaintenancePool()">Maintenance Pool</button>
+                        <button type="button" class="menu-dropdown-item" id="btn-toggle-header" onclick="toggleHeaderView()">Towns</button>
+                    </div>
+                </div>
+                <div class="toolbar-menu">
+                    <button type="button" class="toolbar-menu-trigger">Weeks</button>
+                    <div class="toolbar-menu-dropdown">
+                        <button type="button" class="menu-dropdown-item week-btn active" id="btn-w0" onclick="switchView(0)">Week 1</button>
+                        <button type="button" class="menu-dropdown-item week-btn" id="btn-w1" onclick="switchView(1)">Week 2</button>
+                        <button type="button" class="menu-dropdown-item week-btn" id="btn-w2" onclick="switchView(2)">Week 3</button>
+                        <button type="button" class="menu-dropdown-item week-btn" id="btn-w3" onclick="switchView(3)">Week 4</button>
+                        <button type="button" class="menu-dropdown-item" onclick="toggleWeekend()">W/E</button>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="header-planner-search">
+            <input type="text" id="planner-header-search-input" placeholder="Search planner..." autocomplete="off" oninput="queuePlannerHeaderSearch()" onfocus="renderPlannerHeaderSearchResults()" onkeydown="handlePlannerHeaderSearchKeydown(event)" onblur="setTimeout(hidePlannerHeaderSearchResults, 180)">
+            <div id="planner-header-search-results" class="header-search-results"></div>
         </div>
         <div id="week-display-box" class="week-info-box">WK -- | MON --/--/--</div>
         <div class="grand-total-box"><span class="grand-total-value" id="grand-total">£0.00</span></div>
@@ -754,7 +805,10 @@
                 <div class="message-empty">Loading messages...</div>
             </div>
             <div class="message-conversation">
-                <div id="planner-message-title" class="message-conversation-title">Select a customer</div>
+                <div class="message-conversation-title">
+                    <span id="planner-message-title" class="message-conversation-title-text">Select a customer</span>
+                    <button type="button" id="planner-message-clear-btn" class="message-clear-chat-btn" onclick="clearPlannerMessageThread()" disabled>Clear chat</button>
+                </div>
                 <div id="planner-message-list" class="message-list">
                     <div class="message-empty">Customer conversations will appear here.</div>
                 </div>
@@ -1262,6 +1316,17 @@ function escapeHtml(value) {
     const MESSAGE_INLINE_ATTACHMENT_MAX_MB = 1.5;
     const MESSAGE_POLL_INTERVAL_MS = 10000;
     const PORTAL_ONLINE_WINDOW_MS = 125000;
+    const NEW_JOB_DRAFT_KEY = 'frost_planner_new_job_draft_v1';
+    const NEW_JOB_DRAFT_FIELD_IDS = [
+        'n_cust_name', 'n_cust_phone', 'n_cust_email', 'n_job_notes',
+        'n_coll_address_search', 'n_coll_name', 'n_coll_phone', 'n_coll_email',
+        'n_coll_pc', 'n_coll_street', 'n_coll_town', 'n_coll_county', 'n_coll_ref', 'n_coll_dt',
+        'n_del_address_search', 'n_del_name', 'n_del_phone', 'n_del_email',
+        'n_del_pc', 'n_del_street', 'n_8', 'n_9', 'n_10', 'n_del_dt',
+        'n_coll_pc_2', 'n_coll_town_2', 'n_del_pc_2', 'n_del_town_2',
+        'n_customers_own_invoice_number', 'n_cx_number', 'n_veh_type',
+        'n_total_pallets', 'n_total_weight', 'n_price', 'n_job_contract_type'
+    ];
     const podFolder = "https://drive.google.com/drive/folders/173z9mkrCmqmEyEENeH__-qvdw1SFJl7w?usp=sharing";
 
     const PLANNER_VEHICLES_TABLE = 'planner_vehicles';
@@ -1480,6 +1545,10 @@ function escapeHtml(value) {
     let plannerSearchRows = [];
     let plannerSearchCacheAt = 0;
     let plannerSearchLoadPromise = null;
+    let plannerHeaderSearchTimer = null;
+    let newJobDraftAutosaveTimer = null;
+    let newJobDraftAutosaveReady = false;
+    let restoringNewJobDraft = false;
     const PLANNER_SEARCH_CACHE_TTL_MS = 90000;
     let allJccBookings = []; 
     let historicalTrailers = {}; 
@@ -2427,6 +2496,7 @@ function escapeHtml(value) {
             else if (priceField.value === 'PFJ') priceField.value = '';
             priceField.placeholder = isPFMode ? 'PFJ' : '0.00';
         }
+        queueNewJobDraftSave();
     }
 
     function isQuickCardJobType(type) {
@@ -3726,7 +3796,8 @@ function escapeHtml(value) {
         field.value = 'Generating...';
         const nextNumber = await getNextFtsInvoiceNumber();
         const isStillNewJob = !document.getElementById('sys_job_id').value;
-        if (token === ftsInvoicePrefillToken && isStillNewJob) field.value = nextNumber;
+        const isStillStandardNewJob = isStillNewJob && !isPalletforceJobType(getCurrentJobBookingMode());
+        if (token === ftsInvoicePrefillToken && isStillStandardNewJob) field.value = nextNumber;
     }
 
     async function prefillNextPalletforceInvoiceNumber() {
@@ -3992,7 +4063,7 @@ function escapeHtml(value) {
             fullDetailRow('Booking customer', job.customer_name),
             fullDetailRow('Customer telephone', job.customer_phone),
             fullDetailRow('Customer email', job.customer_email),
-            fullDetailRow('Job notes', job.job_notes),
+            fullDetailRow('Job notes', stripPlannerInternalNoteMarkers(job.job_notes)),
             fullDetailRow('Status', job.status),
             fullDetailRow('Dispatch status', job.dispatch_status),
             fullDetailRow('Dispatch release date', job.dispatch_release_date),
@@ -4501,15 +4572,87 @@ function escapeHtml(value) {
         return String(name || '').replace(/\s*\((?:Leg\s*[12]|Collection(?:\s+\d+\s*\/\s*\d+)?|Delivery(?:\s+\d+\s*\/\s*\d+)?)\)\s*$/i, '').trim();
     }
 
+    const PLANNER_CARD_ROLE_MARKER_RE = /\[PLANNER CARD ROLE:\s*(COLLECTION|DELIVERY)(?:\s+(\d+)\s*\/\s*(\d+))?\]/i;
+    const MULTI_JOB_ROLE_MARKER_RE = /\[MULTI JOB\s+(COLLECTION|DELIVERY)\s+(\d+)\s*\/\s*(\d+)\]/i;
+
+    function stripPlannerCardRoleMarkers(notes) {
+        return String(notes || '')
+            .replace(/\s*\[PLANNER CARD ROLE:\s*(?:COLLECTION|DELIVERY)(?:\s+\d+\s*\/\s*\d+)?\]\s*/ig, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    function stripPlannerInternalNoteMarkers(notes) {
+        return stripPlannerCardRoleMarkers(notes)
+            .replace(/\s*\[MULTI JOB\s+(?:COLLECTION|DELIVERY)\s+\d+\s*\/\s*\d+\]\s*/ig, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    function getPlannerCardRoleMeta(job) {
+        if (!job) return null;
+        const explicitRole = String(job.planner_card_role || '').trim().toLowerCase();
+        if (explicitRole === 'collection' || explicitRole === 'delivery') {
+            return {
+                role: explicitRole,
+                index: Number(job.planner_stage_index || 0) || null,
+                total: Number(job.planner_stage_total || 0) || null
+            };
+        }
+
+        const notes = String(job.job_notes || '');
+        const markerMatch = notes.match(PLANNER_CARD_ROLE_MARKER_RE) || notes.match(MULTI_JOB_ROLE_MARKER_RE);
+        if (markerMatch) {
+            return {
+                role: markerMatch[1].toLowerCase(),
+                index: markerMatch[2] ? Number(markerMatch[2]) : null,
+                total: markerMatch[3] ? Number(markerMatch[3]) : null
+            };
+        }
+
+        const suffixMatch = String(job.customer_name || '').match(/\((Collection|Delivery)(?:\s+(\d+)\s*\/\s*(\d+))?\)\s*$/i);
+        if (suffixMatch) {
+            return {
+                role: suffixMatch[1].toLowerCase(),
+                index: suffixMatch[2] ? Number(suffixMatch[2]) : null,
+                total: suffixMatch[3] ? Number(suffixMatch[3]) : null
+            };
+        }
+
+        return null;
+    }
+
+    function applyPlannerCardRole(payload, role, index = null, total = null) {
+        if (!payload || !role) return payload;
+        const cleanRole = String(role).toLowerCase() === 'delivery' ? 'DELIVERY' : 'COLLECTION';
+        const cleanIndex = Number(index || 0);
+        const cleanTotal = Number(total || 0);
+        const roleText = cleanIndex && cleanTotal ? `${cleanRole} ${cleanIndex}/${cleanTotal}` : cleanRole;
+        const cleanNotes = stripPlannerCardRoleMarkers(payload.job_notes);
+        payload.customer_name = cleanTwoCardCustomerName(payload.customer_name) || payload.customer_name || 'Job';
+        payload.job_notes = [`[PLANNER CARD ROLE: ${roleText}]`, cleanNotes].filter(Boolean).join(' ');
+        return payload;
+    }
+
     function isDeliveryPlannerCardJob(job) {
-        return /\((?:Leg\s*2|Delivery(?:\s+\d+\s*\/\s*\d+)?)\)\s*$/i.test(String(job && job.customer_name || ''));
+        const meta = getPlannerCardRoleMeta(job);
+        return !!(meta && meta.role === 'delivery') || /\(Leg\s*2\)\s*$/i.test(String(job && job.customer_name || ''));
     }
 
     function isCollectionPlannerCardJob(job) {
-        return /\((?:Leg\s*1|Collection(?:\s+\d+\s*\/\s*\d+)?)\)\s*$/i.test(String(job && job.customer_name || ''));
+        const meta = getPlannerCardRoleMeta(job);
+        return !!(meta && meta.role === 'collection') || /\(Leg\s*1\)\s*$/i.test(String(job && job.customer_name || ''));
     }
 
     function getNumberedOperationalStage(job) {
+        const meta = getPlannerCardRoleMeta(job);
+        if (meta && meta.index && meta.total) {
+            return {
+                role: meta.role,
+                index: meta.index,
+                total: meta.total
+            };
+        }
         const match = String(job && job.customer_name || '').match(/\((Collection|Delivery)\s+(\d+)\s*\/\s*(\d+)\)\s*$/i);
         if (!match) return null;
         return {
@@ -4537,11 +4680,10 @@ function escapeHtml(value) {
     }
 
     function getOperationalTaskLabel(job, role) {
-        const customer = String(job && job.customer_name || '');
-        const match = customer.match(/\((Collection|Delivery)(?:\s+(\d+)\s*\/\s*(\d+))?\)\s*$/i);
-        if (match) {
-            const label = match[1].toUpperCase();
-            return match[2] && match[3] ? `${label} ${match[2]}/${match[3]}` : label;
+        const meta = getPlannerCardRoleMeta(job);
+        if (meta && meta.role) {
+            const label = meta.role.toUpperCase();
+            return meta.index && meta.total ? `${label} ${meta.index}/${meta.total}` : label;
         }
         return role === 'delivery' ? 'DELIVERY' : 'COLLECTION';
     }
@@ -6090,8 +6232,8 @@ function escapeHtml(value) {
         const roleLabel = `${isDelivery ? 'Delivery' : 'Collection'} ${stop.index}/${totalForRole}`;
         const taskNote = `[MULTI JOB ${roleLabel.toUpperCase()}]`;
 
-        return {
-            customer_name: `${shared.customerName} (${roleLabel})`,
+        return applyPlannerCardRole({
+            customer_name: cleanTwoCardCustomerName(shared.customerName) || shared.customerName,
             customer_phone: shared.customerPhone,
             customer_email: shared.customerEmail,
             job_notes: [taskNote, shared.jobNotes].filter(Boolean).join(' '),
@@ -6123,7 +6265,7 @@ function escapeHtml(value) {
             job_contract_type: '',
             status: 'pending',
             dispatch_status: 'unsent'
-        };
+        }, role, stop.index, totalForRole);
     }
 
     async function saveMultiJob() {
@@ -6269,7 +6411,7 @@ function escapeHtml(value) {
         collections.forEach((stop, index) => {
             const stage = stripExtraStopFields(payload);
             Object.assign(stage, {
-                customer_name: `${baseCustomerName} (Collection ${index + 1}/${collections.length})`,
+                customer_name: baseCustomerName,
                 coll_cust_name: stop.name || payload.coll_cust_name || baseCustomerName,
                 coll_phone: stop.phone || payload.coll_phone || '',
                 coll_email: stop.email || payload.coll_email || '',
@@ -6290,13 +6432,14 @@ function escapeHtml(value) {
                 del_datetime: firstDelivery.datetime || payload.del_datetime || '',
                 total_price: index === 0 ? payload.total_price : '0'
             });
+            applyPlannerCardRole(stage, 'collection', index + 1, collections.length);
             stagePayloads.push(stage);
         });
 
         deliveries.forEach((stop, index) => {
             const stage = stripExtraStopFields(payload);
             Object.assign(stage, {
-                customer_name: `${baseCustomerName} (Delivery ${index + 1}/${deliveries.length})`,
+                customer_name: baseCustomerName,
                 coll_cust_name: firstCollection.name || payload.coll_cust_name || baseCustomerName,
                 coll_phone: firstCollection.phone || payload.coll_phone || '',
                 coll_email: firstCollection.email || payload.coll_email || '',
@@ -6317,6 +6460,7 @@ function escapeHtml(value) {
                 del_datetime: stop.datetime || payload.del_datetime || '',
                 total_price: '0'
             });
+            applyPlannerCardRole(stage, 'delivery', index + 1, deliveries.length);
             stagePayloads.push(stage);
         });
 
@@ -6385,6 +6529,7 @@ function escapeHtml(value) {
         }
 
         if (!id) {
+            payload.customer_name = cleanTwoCardCustomerName(payload.customer_name) || payload.customer_name || 'Job';
             payload.fts_invoice_number = isPalletforceJobType(payload.job_contract_type)
                 ? await getNextPalletforceInvoiceNumber()
                 : await getNextFtsInvoiceNumber();
@@ -6414,8 +6559,13 @@ function escapeHtml(value) {
 
             if(id) {
                 const editedDeliveryCard = isDeliveryPlannerCardJob(existingJobBeforeSave);
+                const editedCollectionCard = isCollectionPlannerCardJob(existingJobBeforeSave);
                 if (editedDeliveryCard) {
-                    payload.customer_name = `${cleanTwoCardCustomerName(payload.customer_name) || payload.customer_name || 'Job'} (Delivery)`;
+                    const stage = getNumberedOperationalStage(existingJobBeforeSave);
+                    applyPlannerCardRole(payload, 'delivery', stage && stage.index, stage && stage.total);
+                } else if (editedCollectionCard) {
+                    const stage = getNumberedOperationalStage(existingJobBeforeSave);
+                    applyPlannerCardRole(payload, 'collection', stage && stage.index, stage && stage.total);
                 }
                 const { error } = await sb.from('quotes').update(payload).eq('id', id);
                 errorObj = error;
@@ -6424,9 +6574,9 @@ function escapeHtml(value) {
                     if (deliveryPartner) {
                         const deliveryPayload = {
                             ...payload,
-                            customer_name: `${cleanTwoCardCustomerName(payload.customer_name) || payload.customer_name || 'Job'} (Delivery)`,
                             total_price: '0'
                         };
+                        applyPlannerCardRole(deliveryPayload, 'delivery');
                         const partnerUpdate = await sb.from('quotes').update(deliveryPayload).eq('id', deliveryPartner.id);
                         errorObj = partnerUpdate.error;
                     }
@@ -6489,6 +6639,7 @@ Standard jobs without extra legs will continue to save normally.`);
                 throw errorObj;
             }
             
+            if (!id) clearNewJobDraft();
             closeModal('modal-add'); 
             loadAll();
         } catch(e) { console.error(e); alert("Error saving: " + e.message); }
@@ -6511,7 +6662,7 @@ Standard jobs without extra legs will continue to save normally.`);
         document.getElementById('n_cust_name').value = cleanTwoCardCustomerName(j.customer_name) || j.customer_name || '';
         document.getElementById('n_cust_phone').value = j.customer_phone || '';
         document.getElementById('n_cust_email').value = j.customer_email || '';
-        if (document.getElementById('n_job_notes')) document.getElementById('n_job_notes').value = j.job_notes || '';
+        if (document.getElementById('n_job_notes')) document.getElementById('n_job_notes').value = stripPlannerInternalNoteMarkers(j.job_notes) || '';
         if (document.getElementById('n_coll_name')) document.getElementById('n_coll_name').value = j.coll_cust_name || '';
         if (document.getElementById('n_coll_phone')) document.getElementById('n_coll_phone').value = j.coll_phone || '';
         if (document.getElementById('n_coll_email')) document.getElementById('n_coll_email').value = j.coll_email || '';
@@ -6972,15 +7123,22 @@ function sameLocalDateValue(a, b) {
         };
 
         if (existingDelivery) {
-            const { error } = await sb.from('quotes').update(updatePayload).eq('id', existingDelivery.id);
+            const deliveryUpdatePayload = {
+                ...updatePayload,
+                customer_name: cleanTwoCardCustomerName(existingDelivery.customer_name) || cleanTwoCardCustomerName(source.customer_name) || source.customer_name || 'Job',
+                job_notes: existingDelivery.job_notes || source.job_notes || ''
+            };
+            applyPlannerCardRole(deliveryUpdatePayload, 'delivery');
+            const { error } = await sb.from('quotes').update(deliveryUpdatePayload).eq('id', existingDelivery.id);
             if (error) throw error;
-            return { ...existingDelivery, ...updatePayload };
+            return { ...existingDelivery, ...deliveryUpdatePayload };
         }
 
         const deliveryPayload = buildCopiedJobPayload(source);
-        deliveryPayload.customer_name = `${cleanTwoCardCustomerName(source.customer_name) || source.customer_name || 'Job'} (Delivery)`;
+        deliveryPayload.customer_name = cleanTwoCardCustomerName(source.customer_name) || source.customer_name || 'Job';
         deliveryPayload.total_price = '0';
         Object.assign(deliveryPayload, updatePayload);
+        applyPlannerCardRole(deliveryPayload, 'delivery');
         return await insertQuoteAndReturnRow(deliveryPayload, null);
     }
 
@@ -7843,7 +8001,13 @@ Are you sure you want to place it here?`);
 
         try {
             if (isDeliveryPlannerCardJob(source)) {
-                const { error } = await sb.from('quotes').update(updatePayload).eq('id', source.id);
+                const deliveryUpdatePayload = {
+                    ...updatePayload,
+                    customer_name: cleanTwoCardCustomerName(source.customer_name) || source.customer_name || 'Job',
+                    job_notes: source.job_notes || ''
+                };
+                applyPlannerCardRole(deliveryUpdatePayload, 'delivery');
+                const { error } = await sb.from('quotes').update(deliveryUpdatePayload).eq('id', source.id);
                 if (error) throw error;
                 if (assignedSlot && assignedSlot.startsWith('planner-w')) {
                     await clearManualSortForContainerJobs(document.getElementById(assignedSlot), [source.id]);
@@ -7854,7 +8018,13 @@ Are you sure you want to place it here?`);
 
             const existingDelivery = findDeliveryCardForJob(source);
             if (existingDelivery) {
-                const { error } = await sb.from('quotes').update(updatePayload).eq('id', existingDelivery.id);
+                const deliveryUpdatePayload = {
+                    ...updatePayload,
+                    customer_name: cleanTwoCardCustomerName(existingDelivery.customer_name) || cleanTwoCardCustomerName(source.customer_name) || source.customer_name || 'Job',
+                    job_notes: existingDelivery.job_notes || source.job_notes || ''
+                };
+                applyPlannerCardRole(deliveryUpdatePayload, 'delivery');
+                const { error } = await sb.from('quotes').update(deliveryUpdatePayload).eq('id', existingDelivery.id);
                 if (error) throw error;
                 if (assignedSlot && assignedSlot.startsWith('planner-w')) {
                     await clearManualSortForContainerJobs(document.getElementById(assignedSlot), [existingDelivery.id]);
@@ -7864,9 +8034,10 @@ Are you sure you want to place it here?`);
             }
 
             const deliveryPayload = buildCopiedJobPayload(source);
-            deliveryPayload.customer_name = `${cleanTwoCardCustomerName(source.customer_name) || source.customer_name || 'Job'} (Delivery)`;
+            deliveryPayload.customer_name = cleanTwoCardCustomerName(source.customer_name) || source.customer_name || 'Job';
             deliveryPayload.total_price = '0';
             Object.assign(deliveryPayload, updatePayload);
+            applyPlannerCardRole(deliveryPayload, 'delivery');
             await insertQuoteWithOptionalLinkedGroup(deliveryPayload, null);
             if (assignedSlot && assignedSlot.startsWith('planner-w')) {
                 await clearManualSortForContainerJobs(document.getElementById(assignedSlot));
@@ -7898,16 +8069,23 @@ Are you sure you want to place it here?`);
         };
 
         if (deliveryJob) {
-            const { error } = await sb.from('quotes').update(deliveryPayload).eq('id', deliveryJob.id);
+            const deliveryUpdatePayload = {
+                ...deliveryPayload,
+                customer_name: cleanTwoCardCustomerName(deliveryJob.customer_name) || cleanTwoCardCustomerName(collectionJob.customer_name) || collectionJob.customer_name || 'Job',
+                job_notes: deliveryJob.job_notes || collectionJob.job_notes || ''
+            };
+            applyPlannerCardRole(deliveryUpdatePayload, 'delivery');
+            const { error } = await sb.from('quotes').update(deliveryUpdatePayload).eq('id', deliveryJob.id);
             if (error) throw error;
             await clearManualSortForContainerJobs(document.getElementById(deliverySlot), [deliveryJob.id]);
             return;
         }
 
         const newDelivery = buildCopiedJobPayload(collectionJob);
-        newDelivery.customer_name = `${cleanTwoCardCustomerName(collectionJob.customer_name) || collectionJob.customer_name || 'Job'} (Delivery)`;
+        newDelivery.customer_name = cleanTwoCardCustomerName(collectionJob.customer_name) || collectionJob.customer_name || 'Job';
         newDelivery.total_price = '0';
         Object.assign(newDelivery, deliveryPayload);
+        applyPlannerCardRole(newDelivery, 'delivery');
         await insertQuoteWithOptionalLinkedGroup(newDelivery, null);
         await clearManualSortForContainerJobs(document.getElementById(deliverySlot));
     }
@@ -8239,6 +8417,127 @@ Are you sure you want to place it here?`);
         });
     }
 
+    function getNewJobDraftValues() {
+        const values = {};
+        NEW_JOB_DRAFT_FIELD_IDS.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) values[id] = el.value || '';
+        });
+        return values;
+    }
+
+    function hasNewJobDraftContent(values) {
+        return Object.entries(values || {}).some(([id, value]) => {
+            const text = String(value || '').trim();
+            if (!text) return false;
+            if (id === 'n_veh_type') return false;
+            if (id === 'n_price' && text === 'PFJ' && !isPalletforceJobType(values.n_job_contract_type)) return false;
+            return true;
+        });
+    }
+
+    function clearNewJobDraft() {
+        if (newJobDraftAutosaveTimer) {
+            clearTimeout(newJobDraftAutosaveTimer);
+            newJobDraftAutosaveTimer = null;
+        }
+        try {
+            localStorage.removeItem(NEW_JOB_DRAFT_KEY);
+        } catch (err) {
+            console.warn('Could not clear the new job draft.', err);
+        }
+    }
+
+    function saveNewJobDraft() {
+        newJobDraftAutosaveTimer = null;
+        if (restoringNewJobDraft) return;
+        if (String(document.getElementById('sys_job_id')?.value || '').trim()) return;
+
+        const values = getNewJobDraftValues();
+        if (!hasNewJobDraftContent(values)) {
+            clearNewJobDraft();
+            return;
+        }
+
+        try {
+            localStorage.setItem(NEW_JOB_DRAFT_KEY, JSON.stringify({
+                savedAt: new Date().toISOString(),
+                values
+            }));
+        } catch (err) {
+            console.warn('Could not save the new job draft.', err);
+        }
+    }
+
+    function queueNewJobDraftSave() {
+        if (restoringNewJobDraft) return;
+        if (newJobDraftAutosaveTimer) clearTimeout(newJobDraftAutosaveTimer);
+        newJobDraftAutosaveTimer = setTimeout(saveNewJobDraft, 350);
+    }
+
+    function setupNewJobDraftAutosave() {
+        if (newJobDraftAutosaveReady) return;
+        const modal = document.getElementById('modal-add');
+        if (!modal) return;
+
+        const handler = event => {
+            if (event && event.target && NEW_JOB_DRAFT_FIELD_IDS.includes(event.target.id)) {
+                queueNewJobDraftSave();
+            }
+        };
+
+        modal.addEventListener('input', handler, true);
+        modal.addEventListener('change', handler, true);
+        newJobDraftAutosaveReady = true;
+    }
+
+    async function restoreNewJobDraft() {
+        let draft = null;
+        try {
+            const raw = localStorage.getItem(NEW_JOB_DRAFT_KEY);
+            draft = raw ? JSON.parse(raw) : null;
+        } catch (err) {
+            console.warn('Could not read the new job draft.', err);
+            clearNewJobDraft();
+            return false;
+        }
+
+        const values = draft && draft.values ? draft.values : null;
+        if (!hasNewJobDraftContent(values)) return false;
+
+        restoringNewJobDraft = true;
+        try {
+            const mode = String(values.n_job_contract_type || '').trim();
+            await setJobBookingMode(mode);
+            const skipFields = new Set(['n_job_contract_type']);
+            if (isPalletforceJobType(mode)) {
+                skipFields.add('n_customers_own_invoice_number');
+                skipFields.add('n_cx_number');
+            }
+
+            NEW_JOB_DRAFT_FIELD_IDS.forEach(id => {
+                if (skipFields.has(id)) return;
+                const el = document.getElementById(id);
+                if (el && Object.prototype.hasOwnProperty.call(values, id)) {
+                    el.value = values[id] || '';
+                }
+            });
+
+            updateNewJobDatePickerLimits();
+            switchFormTab('leg1');
+            return true;
+        } finally {
+            restoringNewJobDraft = false;
+        }
+    }
+
+    async function openNewJobForm() {
+        resetForm();
+        openModal('modal-add');
+        setupNewJobDraftAutosave();
+        await restoreNewJobDraft();
+    }
+
     function resetForm() {
         document.getElementById('sys_job_id').value = '';
         ['n_cust_name','n_coll_address_search','n_del_address_search','n_coll_name','n_coll_phone','n_coll_email','n_cust_phone', 'n_cust_email','n_job_notes','n_coll_town','n_coll_pc','n_coll_dt','n_8','n_del_pc','n_price','n_coll_street','n_coll_county','n_coll_ref','n_del_name','n_del_street','n_9','n_10','n_del_dt', 'n_del_pc_2', 'n_del_phone', 'n_del_email', 'n_total_pallets', 'n_total_weight', 'n_coll_pc_2', 'n_coll_town_2', 'n_del_town_2', 'n_customers_own_invoice_number', 'n_cx_number', 'n_fts_invoice_number', 'n_job_contract_type', 'n_coll_time_period', 'n_del_time_period'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).value = ''; });
@@ -8455,7 +8754,7 @@ Are you sure you want to place it here?`);
         return {
             ...job,
             id: `delivery-${job.id}`,
-            customer_name: `${cleanCustomer} (Delivery)`,
+            customer_name: cleanCustomer,
             _plannerSearchBaseId: String(job.id),
             _plannerSearchFocusId: `delivery-${job.id}`,
             _plannerSearchVirtualDelivery: true,
@@ -8521,6 +8820,117 @@ Are you sure you want to place it here?`);
         const from = getVal(job.coll_cust_name, job.customer_name, getVal(job.coll_postcode, job.coll_town, 'Collection'));
         const to = getVal(job.del_cust_name, getVal(job.del_postcode, job.del_town, ''), 'Delivery');
         return `${from} ➔ ${to}`;
+    }
+
+    async function getPlannerSearchMatches(queryText, forceRefresh = false, limit = 100) {
+        const query = String(queryText || '').trim().toLowerCase();
+        const jobs = await loadPlannerSearchRows(forceRefresh);
+        if (!query) return { query, jobs, results: [] };
+
+        const terms = query.split(/\s+/).filter(Boolean);
+        const baseResults = jobs.filter(job => {
+            const haystack = getSearchablePlannerText(job);
+            return terms.every(term => haystack.includes(term));
+        });
+        const results = expandPlannerFtsSearchResults(baseResults, jobs, query).slice(0, limit);
+        return { query, jobs, results };
+    }
+
+    function getPlannerSearchResultHtml(job, clickHandler = 'focusPlannerSearchResult') {
+        const type = getPlannerSearchType(job);
+        const weekOffset = getPlannerSearchWeek(job);
+        const info = getWeekInfo(weekOffset);
+        const route = escapeHtml(getPlannerSearchRoute(job));
+        const customer = escapeHtml(job.customer_name || job.coll_cust_name || job.del_cust_name || getPlannerSearchTypeLabel(type));
+        const slot = escapeHtml(getPlannerSearchSlot(job) || 'Unassigned');
+        const searchDateValue = getPlannerSearchDateValue(job);
+        const parsedDate = searchDateValue ? new Date(searchDateValue) : null;
+        const date = parsedDate && !isNaN(parsedDate) ? parsedDate.toLocaleDateString('en-GB') : 'No date';
+        const status = escapeHtml(job.status || 'pending');
+        const ref = escapeHtml([job.coll_ref, job.del_ref, job.customers_own_invoice_number, job.fts_invoice_number].filter(Boolean).join(' | '));
+        const focusId = getPlannerSearchFocusId(job);
+        return `
+            <div class="planner-search-result" data-focus-id="${escapeHtml(focusId)}" onclick="${clickHandler}('${escapeInlineArg(focusId)}')">
+                <div class="planner-search-result-title"><span class="planner-search-result-type ${type}">${getPlannerSearchTypeLabel(type)}</span>${customer}</div>
+                <div class="planner-search-result-meta"><b>Route:</b> ${route}</div>
+                <div class="planner-search-result-meta"><b>Week:</b> WK ${info.week} | MON ${info.date} &nbsp; <b>Date:</b> ${date} &nbsp; <b>Status:</b> ${status}</div>
+                <div class="planner-search-result-meta"><b>Location:</b> ${slot}${ref ? ` &nbsp; <b>Ref:</b> ${ref}` : ''}</div>
+            </div>`;
+    }
+
+    function hidePlannerHeaderSearchResults() {
+        const resultBox = document.getElementById('planner-header-search-results');
+        if (resultBox) {
+            resultBox.style.display = 'none';
+            resultBox.innerHTML = '';
+        }
+    }
+
+    function queuePlannerHeaderSearch() {
+        if (plannerHeaderSearchTimer) clearTimeout(plannerHeaderSearchTimer);
+        const input = document.getElementById('planner-header-search-input');
+        const resultBox = document.getElementById('planner-header-search-results');
+        const query = String(input && input.value || '').trim();
+        if (!resultBox) return;
+        if (!query) {
+            hidePlannerHeaderSearchResults();
+            return;
+        }
+        resultBox.style.display = 'block';
+        resultBox.innerHTML = `<div style="padding:12px; color:#64748b; font-size:0.76rem; font-weight:800;">Searching...</div>`;
+        plannerHeaderSearchTimer = setTimeout(() => renderPlannerHeaderSearchResults(), 180);
+    }
+
+    async function renderPlannerHeaderSearchResults(forceRefresh = false) {
+        const input = document.getElementById('planner-header-search-input');
+        const resultBox = document.getElementById('planner-header-search-results');
+        if (!input || !resultBox) return;
+
+        const query = String(input.value || '').trim();
+        if (!query) {
+            hidePlannerHeaderSearchResults();
+            return;
+        }
+        if (query.length < 2) {
+            resultBox.style.display = 'block';
+            resultBox.innerHTML = `<div style="padding:12px; color:#64748b; font-size:0.76rem; font-weight:800;">Type at least 2 characters...</div>`;
+            return;
+        }
+
+        resultBox.style.display = 'block';
+        resultBox.innerHTML = `<div style="padding:12px; color:#64748b; font-size:0.76rem; font-weight:800;">Searching planner...</div>`;
+        const { results } = await getPlannerSearchMatches(query, forceRefresh, 10);
+
+        if (String(input.value || '').trim() !== query) return;
+        if (!results.length) {
+            resultBox.innerHTML = `<div style="padding:12px; color:#64748b; font-size:0.76rem; font-weight:800;">No matching planner cards found.</div>`;
+            return;
+        }
+
+        resultBox.innerHTML = results.map(job => getPlannerSearchResultHtml(job, 'selectPlannerHeaderSearchResult')).join('');
+    }
+
+    function handlePlannerHeaderSearchKeydown(event) {
+        if (!event) return;
+        if (event.key === 'Escape') {
+            hidePlannerHeaderSearchResults();
+            event.currentTarget.blur();
+            return;
+        }
+        if (event.key === 'Enter') {
+            const first = document.querySelector('#planner-header-search-results .planner-search-result[data-focus-id]');
+            if (first && first.dataset.focusId) {
+                event.preventDefault();
+                selectPlannerHeaderSearchResult(first.dataset.focusId);
+            }
+        }
+    }
+
+    async function selectPlannerHeaderSearchResult(id) {
+        const input = document.getElementById('planner-header-search-input');
+        if (input) input.value = '';
+        hidePlannerHeaderSearchResults();
+        await focusPlannerSearchResult(id);
     }
 
     async function renderPlannerSearchResults(forceRefresh = false) {
@@ -8594,6 +9004,7 @@ Are you sure you want to place it here?`);
 
         const selectedWeekOffset = getPlannerSearchWeek(job);
         closePlannerSearch();
+        hidePlannerHeaderSearchResults();
         plannerWeekStartOffset = selectedWeekOffset;
         currentWeekOffset = 0;
         activePlannerView = 0;
@@ -8915,6 +9326,7 @@ Are you sure you want to place it here?`);
     });
 
     window.addEventListener('beforeunload', () => {
+        saveNewJobDraft();
         if (plannerPollingTimer) clearInterval(plannerPollingTimer);
         if (plannerMessagePollTimer) clearInterval(plannerMessagePollTimer);
         if (plannerRealtimeChannel) {
@@ -9530,6 +9942,7 @@ Are you sure you want to place it here?`);
         const fileInput = document.getElementById('planner-message-file');
         const fileLabel = document.getElementById('planner-message-file-label');
         const jobInput = document.getElementById('planner-message-job-link');
+        const clearBtn = document.getElementById('planner-message-clear-btn');
         if (!title || !list || !input || !send) return;
         const messages = (plannerMessagesRaw || []).filter(message => getMessageCustomerKey(message) === plannerActiveMessageEmail);
         const displayName = messages.find(message => message.customer_name)?.customer_name || getPlannerMessageClientName(plannerActiveMessageEmail) || plannerActiveMessageEmail || 'Select a customer';
@@ -9539,6 +9952,7 @@ Are you sure you want to place it here?`);
         if (fileInput) fileInput.disabled = !plannerActiveMessageEmail;
         if (fileLabel) fileLabel.classList.toggle('disabled', !plannerActiveMessageEmail);
         if (jobInput) jobInput.disabled = !plannerActiveMessageEmail;
+        if (clearBtn) clearBtn.disabled = !plannerActiveMessageEmail || !messages.length;
         if (!plannerActiveMessageEmail) {
             clearPlannerMessageFile();
             clearPlannerMessageJobLink();
@@ -9573,6 +9987,51 @@ Are you sure you want to place it here?`);
         renderPlannerMessageThreads();
         await renderPlannerMessageJobOptions();
         await markPlannerThreadRead(plannerActiveMessageEmail);
+    }
+
+    async function clearPlannerMessageThread() {
+        const cleanEmail = String(plannerActiveMessageEmail || '').trim().toLowerCase();
+        if (!cleanEmail) return;
+
+        const clientName = getPlannerMessageClientName(cleanEmail) || cleanEmail;
+        const threadMessages = (plannerMessagesRaw || []).filter(message => getMessageCustomerKey(message) === cleanEmail);
+        if (!threadMessages.length) {
+            alert('There are no messages to clear for this client.');
+            return;
+        }
+
+        if (!confirm(`Clear all chat messages for ${clientName}?\n\nThis will remove the conversation from the planner and the customer portal.`)) {
+            return;
+        }
+
+        const clearBtn = document.getElementById('planner-message-clear-btn');
+        if (clearBtn) {
+            clearBtn.disabled = true;
+            clearBtn.textContent = 'Clearing...';
+        }
+
+        try {
+            const { error } = await sb.from(PORTAL_MESSAGES_TABLE)
+                .delete()
+                .ilike('customer_email', cleanEmail);
+            if (error) throw error;
+
+            plannerMessagesRaw = (plannerMessagesRaw || []).filter(message => getMessageCustomerKey(message) !== cleanEmail);
+            clearPlannerMessageFile();
+            clearPlannerMessageJobLink();
+            renderPlannerMessageUnread();
+            renderPlannerMessageThreads();
+            alert('Chat cleared for this client.');
+        } catch (err) {
+            console.error('Could not clear chat:', err);
+            const detail = getPlannerSupabaseErrorText(err) || (err && err.message) || String(err);
+            alert('Could not clear this chat. Please make sure the portal_messages table grants DELETE permission, then try again. ' + detail);
+            renderPlannerConversation();
+        } finally {
+            if (clearBtn) {
+                clearBtn.textContent = 'Clear chat';
+            }
+        }
     }
 
     async function loadPlannerMessages(silent = true, includeClients = false) {
@@ -9854,7 +10313,7 @@ Are you sure you want to place it here?`);
             'q': () => openQuickCardModal(),
             'i': () => openInstructionModal(),
             's': () => openPlannerSearch(),
-            'n': () => { resetForm(); openModal('modal-add'); },
+            'n': () => openNewJobForm(),
             'u': () => toggleUnassigned(),
             'm': () => toggleMaintenanceCards(),
             'p': () => toggleMaintenancePool()
